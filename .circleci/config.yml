@@ -1,0 +1,48 @@
+version: 2.1
+jobs:
+  build:
+    docker:
+      - image: golang:latest
+
+    steps:
+      - checkout
+
+      # Langkah 1: Instal hadolint
+      - run:
+          name: Install hadolint
+          command: |
+            apt-get update
+            apt-get install -y hadolint
+
+      # Langkah 2: Jalankan hadolint untuk Dockerfile
+      - run:
+          name: Lint Dockerfile
+          command: hadolint Dockerfile
+
+      # Langkah 3: Jalankan unit test untuk backend
+      - run:
+          name: Run Unit Tests
+          command: go test -v -short --count=1 $(go list ./...)
+
+      # Langkah 4: Build dan push Docker image
+      - run:
+          name: Build and Push Docker Image
+          command: |
+            # Build Docker image
+            docker build -t muhammadardiyansyah/karsajobs:latest .
+            
+            # mengubah nama image agar sesuai dengan format Github Packages
+	    docker tag muhammadardiyansyah/karsajobs:latest ghcr.io/muhammadardiyansyah/a433-microservices/karsajobs:latest
+
+            # Log in to Github Packages
+            export CR_PAT=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
+	    echo $CR_PAT | docker login ghcr.io -u muhammadardiyansyah --password-stdin
+
+            # Push Docker image
+            docker push ghcr.io/muhammadardiyansyah/a433-microservices/karsajobs:latest
+
+workflows:
+  version: 2
+  build-and-deploy:
+    jobs:
+      - build
