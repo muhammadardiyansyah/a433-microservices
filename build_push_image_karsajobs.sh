@@ -13,7 +13,7 @@ echo " "
 
 # mengubah nama image agar sesuai dengan format Github Packages
 echo "mengubah nama image sesuai Github Packages"
-docker tag karsajobs:latest ghcr.io/muhammadardiyansyah/karsajobs:latest
+docker tag karsajobs:latest ghcr.io/muhammadardiyansyah/a433-microservices/karsajobs:latest
 
 # Waiting for next commmand
 sleep 5
@@ -21,7 +21,7 @@ echo " "
 
 # Login ke GitHub Package
 echo "Login ke Github Packages"
-export CR_PAT=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
+export CR_PAT=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
 echo $CR_PAT | docker login ghcr.io -u muhammadardiyansyah --password-stdin
 
 # Waiting for end commmand
@@ -30,7 +30,7 @@ echo " "
 
 # Push image ke GitHub Package
 echo "Mengunggah image ke Github Packages"
-docker push ghcr.io/muhammadardiyansyah/karsajobs:latest
+docker push ghcr.io/muhammadardiyansyah/a433-microservices/karsajobs:latest
 
 # Waiting for end commmand
 sleep 5
