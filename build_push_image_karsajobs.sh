@@ -21,7 +21,7 @@ echo " "
 
 # Login ke GitHub Package
 echo "Login ke Github Packages"
-export CR_PAT=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
+export CR_PAT=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
 echo $CR_PAT | docker login ghcr.io -u muhammadardiyansyah --password-stdin
 
 # Waiting for end commmand
