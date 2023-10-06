@@ -29,7 +29,7 @@ jobs:
 	    docker tag muhammadardiyansyah/karsajobs-ui:latest ghcr.io/muhammadardiyansyah/a433-microservices/karsajobs-ui:latest
 
             # Log in to Github Packages
-            export CR_PAT=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
+            export CR_PAT=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
 	    echo $CR_PAT | docker login ghcr.io -u muhammadardiyansyah --password-stdin
 
             # Push Docker image
